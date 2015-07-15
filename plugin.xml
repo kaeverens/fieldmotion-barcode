@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin 
+id="com.fieldmotion.barcode"
+version="0.2.2"
+xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+xmlns:android="http://schemas.android.com/apk/res/android">
+
+<name>FM Barcode</name>
+<description>FM Barcode is a plugin for retrieving images from a background camera and detecting barcodes in the image</description>
+<author>Kae Verens</author>
+<license>MIT</license>
+<keywords>camera,base64,phonegap,cordova,jpeg,ios,android,barcode</keywords>
+<repo>https://github.com/kaeverens/fieldmotion-barcode</repo>
+<issue>https://github.com/kaeverens/fieldmotion-barcode</issue>
+
+<engines>
+    <engine name="cordova" version=">=2.9" />
+</engines>
+
+<js-module name="CameraPlus" src="www/FMBarcode.js">
+    <clobbers target="cordova.plugins.FMBarcode" />
+</js-module>
+
+<platform name="android">
+    <config-file parent="/*" target="res/xml/config.xml">
+        <feature name="FMBarcode">
+        <param name="android-package" value="com.fieldmotion.barcode.FMBarcode" />
+        </feature>
+    </config-file>
+
+    <config-file target="AndroidManifest.xml" parent="/*">
+        <uses-permission android:name="android.permission.CAMERA" />     
+    </config-file>
+
+    <source-file src="src/android/FMBarcode.java" target-dir="src/com/fieldmotion/barcode" />
+    <source-file src="src/android/CameraManager.java" target-dir="src/com/fieldmotion/barcode" />
+</platform>
+
+<platform name="ios">
+    <config-file parent="/*" target="config.xml">
+    <feature name="FMBarcode">
+        <param name="ios-package" value="FMBarcode" />
+    </feature>
+    </config-file>
+
+    <source-file src="src/ios/FMBarcode.m" />
+
+    <header-file src="src/ios/CameraManager.h" />
+    <source-file src="src/ios/CameraManager.m" />
+
+    <framework src="CoreVideo.framework" weak="false" />
+    <framework src="CoreGraphics.framework" weak="false" />
+    <framework src="QuartzCore.framework" weak="false" />
+
+</platform>
+
+</plugin>
